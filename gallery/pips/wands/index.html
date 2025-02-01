@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarot Gallery</title>
+    <style>
+        
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr  1fr 1fr  1fr 1fr  1fr 1fr  1fr 1fr;
+        grid-gap: 1px;
+        align-items: stretch;
+        justify-items: center;
+    }
+
+    .grid img {
+        max-width: 100%;
+    }
+
+
+        /* Navbar container */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+    </style>
+    
+</head>
+<body>
+
+<div class="navbar">
+    <a href="../../about/index.html" class="toplink">About</a>
+    <a href="../../index.html" class="toplink">All</a>
+
+    <div class="dropdown" id="dropdown-royals">
+        <button class="dropbtn">Royals
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="../../royals/by/suite/index.html">By Suite</a>
+            <a href="../../royals/by/rank/index.html">By Rank</a>
+        </div>
+    </div>
+
+    <div class="dropdown" id="dropdown-pips">
+        <button class="dropbtn">Pips
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="../by/number.html">By Number</a>
+            <a href="index.html">Wands</a>
+            <a href="../cups/index.html">Cups</a>
+            <a href="../swords/index.html">Swords</a>
+            <a href="../coins/index.html">Coins</a>
+        </div>
+    </div>
+    <a href="../../trumps/index.html" class="toplink">Trumps</a>
+    <a href="../../deal/index.html" class="toplink">Deal</a>
+
+</div>
+
+
+
+    <div class="grid">
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands01.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg" alt="Wands01.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands02.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Wands02.jpg" alt="Wands02.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands03.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Wands03.jpg" alt="Wands03.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands04.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Wands04.jpg" alt="Wands04.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands05.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Wands05.jpg" alt="Wands05.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands06.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Wands06.jpg" alt="Wands06.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands07.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Wands07.jpg" alt="Wands07.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands08.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Wands08.jpg" alt="Wands08.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Tarot_Nine_of_Wands.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Tarot_Nine_of_Wands.jpg" alt="Tarot_Nine_of_Wands.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands10.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Wands10.jpg" alt="Wands10.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands11.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Wands11.jpg" alt="Wands11.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands12.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Wands12.jpg" alt="Wands12.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands13.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Wands13.jpg" alt="Wands13.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands14.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Wands14.jpg" alt="Wands14.jpg"/>
+            </a>
+        
+    </div>
+
+
+</body>
+</html>

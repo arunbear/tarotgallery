@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarot Gallery</title>
+    <style>
+        
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 1px;
+        align-items: stretch;
+        justify-items: center;
+    }
+
+    .grid img {
+        max-width: 100%;
+    }
+
+
+        /* Navbar container */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+    </style>
+    
+<script>
+    function handleDragStart (evt) {
+        console.log('Drag started');
+        console.log("Drag source: %o", evt.target);
+        // store dragged img for use when dropping
+        evt.dataTransfer.setData('text/html', evt.target.id);
+        console.log("draggedNodeId: %s", evt.target.id);
+    }
+
+    function handleDragOver (evt) {
+        evt.dataTransfer.dropEffect = 'move';
+        evt.preventDefault();
+    }
+
+    function handleDrop (evt) {
+        console.log('Drop handler ...');
+        console.log("Drop target: %o", evt.target);
+
+        let draggedNodeId;
+        let draggedNode;
+        let dropSiteContainerId;
+        let dropSiteContainer;
+
+        draggedNodeId = evt.dataTransfer.getData('text/html');
+        console.log("draggedNodeId: %s", draggedNodeId);
+        draggedNode = document.getElementById(draggedNodeId);
+
+        if (draggedNode !== evt.target) {
+            console.log("Can do drop ...");
+            // replace drag site image with the one at the drop site
+            dropSiteContainerId = evt.target.parentNode.parentNode.getAttribute('id');
+            console.log("dopSiteContainerId: %s", dropSiteContainerId);
+            draggedNode.parentNode.parentNode.appendChild(evt.target.parentNode);
+
+            // replace drop site image with the one from the drag site
+            dropSiteContainer = document.getElementById(dropSiteContainerId);
+            dropSiteContainer.appendChild(draggedNode.parentNode);
+        } else {
+            console.log("Can not do drop onto itself");
+        }
+    }
+</script>
+
+</head>
+<body>
+
+<div class="navbar">
+    <a href="../../about/index.html" class="toplink">About</a>
+    <a href="../../index.html" class="toplink">All</a>
+
+    <div class="dropdown" id="dropdown-royals">
+        <button class="dropbtn">Royals
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="../../royals/by/suite/index.html">By Suite</a>
+            <a href="../../royals/by/rank/index.html">By Rank</a>
+        </div>
+    </div>
+
+    <div class="dropdown" id="dropdown-pips">
+        <button class="dropbtn">Pips
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="number.html">By Number</a>
+            <a href="../wands/index.html">Wands</a>
+            <a href="../cups/index.html">Cups</a>
+            <a href="../swords/index.html">Swords</a>
+            <a href="../coins/index.html">Coins</a>
+        </div>
+    </div>
+    <a href="../../trumps/index.html" class="toplink">Trumps</a>
+    <a href="../../deal/index.html" class="toplink">Deal</a>
+
+</div>
+
+
+<div class="grid">
+    
+        <div id="drag-container-1" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-1"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands01.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-1"
+                     alt="Wands01.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-2" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-2"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups01.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-2"
+                     alt="Cups01.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-3" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-3"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords01.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Swords01.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-3"
+                     alt="Swords01.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-4" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-4"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents01.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Pents01.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-4"
+                     alt="Pents01.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-5" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-5"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands02.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Wands02.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-5"
+                     alt="Wands02.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-6" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-6"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups02.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Cups02.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-6"
+                     alt="Cups02.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-7" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-7"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords02.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Swords02.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-7"
+                     alt="Swords02.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-8" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-8"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents02.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Pents02.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-8"
+                     alt="Pents02.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-9" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-9"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands03.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Wands03.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-9"
+                     alt="Wands03.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-10" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-10"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups03.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Cups03.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-10"
+                     alt="Cups03.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-11" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-11"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords03.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Swords03.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-11"
+                     alt="Swords03.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-12" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-12"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents03.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Pents03.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-12"
+                     alt="Pents03.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-13" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-13"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands04.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Wands04.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-13"
+                     alt="Wands04.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-14" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-14"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups04.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Cups04.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-14"
+                     alt="Cups04.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-15" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-15"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords04.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Swords04.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-15"
+                     alt="Swords04.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-16" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-16"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents04.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Pents04.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-16"
+                     alt="Pents04.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-17" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-17"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands05.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Wands05.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-17"
+                     alt="Wands05.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-18" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-18"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups05.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Cups05.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-18"
+                     alt="Cups05.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-19" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-19"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords05.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Swords05.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-19"
+                     alt="Swords05.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-20" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-20"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents05.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Pents05.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-20"
+                     alt="Pents05.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-21" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-21"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands06.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Wands06.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-21"
+                     alt="Wands06.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-22" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-22"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups06.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Cups06.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-22"
+                     alt="Cups06.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-23" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-23"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords06.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Swords06.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-23"
+                     alt="Swords06.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-24" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-24"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents06.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Pents06.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-24"
+                     alt="Pents06.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-25" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-25"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands07.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Wands07.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-25"
+                     alt="Wands07.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-26" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-26"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups07.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Cups07.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-26"
+                     alt="Cups07.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-27" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-27"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords07.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Swords07.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-27"
+                     alt="Swords07.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-28" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-28"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents07.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Pents07.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-28"
+                     alt="Pents07.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-29" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-29"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands08.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Wands08.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-29"
+                     alt="Wands08.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-30" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-30"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups08.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Cups08.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-30"
+                     alt="Cups08.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-31" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-31"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords08.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Swords08.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-31"
+                     alt="Swords08.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-32" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-32"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents08.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Pents08.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-32"
+                     alt="Pents08.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-33" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-33"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Tarot_Nine_of_Wands.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Tarot_Nine_of_Wands.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-33"
+                     alt="Tarot_Nine_of_Wands.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-34" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-34"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups09.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Cups09.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-34"
+                     alt="Cups09.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-35" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-35"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords09.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Swords09.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-35"
+                     alt="Swords09.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-36" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-36"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents09.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Pents09.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-36"
+                     alt="Pents09.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-37" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-37"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands10.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Wands10.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-37"
+                     alt="Wands10.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-38" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-38"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups10.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Cups10.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-38"
+                     alt="Cups10.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-39" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-39"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords10.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords10.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-39"
+                     alt="Swords10.jpg"/>
+            </a>
+        </div>
+    
+        <div id="drag-container-40" class="card-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <a class="card"
+               id="link-to-card-40"
+               href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents10.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Pents10.jpg"
+                     ondragstart="handleDragStart(event)"
+                     id="image-40"
+                     alt="Pents10.jpg"/>
+            </a>
+        </div>
+    
+</div>
+
+
+</body>
+</html>

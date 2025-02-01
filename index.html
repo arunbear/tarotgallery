@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarot Gallery</title>
+    <style>
+        
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    dt {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    dd, li {
+        margin: 0;
+        padding: 0 0 0.5em 0;
+    }
+
+
+        /* Navbar container */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+    </style>
+    
+</head>
+<body>
+
+<div class="navbar">
+    <a href="gallery/about/index.html" class="toplink">About</a>
+    <a href="gallery/index.html" class="toplink">All</a>
+
+    <div class="dropdown" id="dropdown-royals">
+        <button class="dropbtn">Royals
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="gallery/royals/by/suite/index.html">By Suite</a>
+            <a href="gallery/royals/by/rank/index.html">By Rank</a>
+        </div>
+    </div>
+
+    <div class="dropdown" id="dropdown-pips">
+        <button class="dropbtn">Pips
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="gallery/pips/by/number.html">By Number</a>
+            <a href="gallery/pips/wands/index.html">Wands</a>
+            <a href="gallery/pips/cups/index.html">Cups</a>
+            <a href="gallery/pips/swords/index.html">Swords</a>
+            <a href="gallery/pips/coins/index.html">Coins</a>
+        </div>
+    </div>
+    <a href="gallery/trumps/index.html" class="toplink">Trumps</a>
+    <a href="gallery/deal/index.html" class="toplink">Deal</a>
+
+</div>
+
+
+
+    <h1>About</h1>
+    <p class="about">
+        The images of the Waite-Smith Tarot include a great deal of visual detail. This website collects the images
+        together
+        into various galleries so that the images can be compared and contrasted with one another.
+    </p>
+    <p>
+        This should be of particular interest to students of the Tarot seeking to develop intuition based primarily on
+        the contents
+        of the images themselves, rather than on textbook meanings.
+    </p>
+
+    <h2>Galleries</h2>
+    <dl>
+        <dt>All</dt>
+        <dd>View <a href="gallery/index.html"></a> all cards with the Minor Arcana shown first.</dd>
+
+        <dt>Royals</dt>
+        <dd>View the court cards, either grouped by suite, or by rank.</dd>
+
+        <dt>Pips</dt>
+        <dd>View the minor arcana cards, either grouped by suite, or by number.</dd>
+
+        <dt>Trumps</dt>
+        <dd>View the major arcana cards.</dd>
+
+    </dl>
+
+    <h2>Other Tarot Resources</h2>
+    <ul>
+        <li><a href="https://waitesmith.org/">Waite-Smith tarot card museum</a> and research library</li>
+        <li><a href="https://www.advancedtarotsecrets.com/">Advanced Tarot Secrets</a></li>
+    </ul>
+
+
+</body>
+</html>

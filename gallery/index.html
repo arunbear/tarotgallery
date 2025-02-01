@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarot Gallery</title>
+    <style>
+        
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 1px;
+        align-items: stretch;
+        justify-items: center;
+    }
+
+    .grid img {
+        max-width: 100%;
+    }
+
+
+        /* Navbar container */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+    </style>
+    
+</head>
+<body>
+
+<div class="navbar">
+    <a href="about/index.html" class="toplink">About</a>
+    <a href="index.html" class="toplink">All</a>
+
+    <div class="dropdown" id="dropdown-royals">
+        <button class="dropbtn">Royals
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="royals/by/suite/index.html">By Suite</a>
+            <a href="royals/by/rank/index.html">By Rank</a>
+        </div>
+    </div>
+
+    <div class="dropdown" id="dropdown-pips">
+        <button class="dropbtn">Pips
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="pips/by/number.html">By Number</a>
+            <a href="pips/wands/index.html">Wands</a>
+            <a href="pips/cups/index.html">Cups</a>
+            <a href="pips/swords/index.html">Swords</a>
+            <a href="pips/coins/index.html">Coins</a>
+        </div>
+    </div>
+    <a href="trumps/index.html" class="toplink">Trumps</a>
+    <a href="deal/index.html" class="toplink">Deal</a>
+
+</div>
+
+
+
+    <div class="grid">
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands01.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg" alt="Wands01.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands02.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Wands02.jpg" alt="Wands02.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands03.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Wands03.jpg" alt="Wands03.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands04.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Wands04.jpg" alt="Wands04.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands05.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Wands05.jpg" alt="Wands05.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands06.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Wands06.jpg" alt="Wands06.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands07.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Wands07.jpg" alt="Wands07.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands08.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Wands08.jpg" alt="Wands08.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Tarot_Nine_of_Wands.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Tarot_Nine_of_Wands.jpg" alt="Tarot_Nine_of_Wands.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands10.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Wands10.jpg" alt="Wands10.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands11.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Wands11.jpg" alt="Wands11.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands12.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Wands12.jpg" alt="Wands12.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands13.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Wands13.jpg" alt="Wands13.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Wands14.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Wands14.jpg" alt="Wands14.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups01.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg" alt="Cups01.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups02.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Cups02.jpg" alt="Cups02.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups03.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Cups03.jpg" alt="Cups03.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups04.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Cups04.jpg" alt="Cups04.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups05.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Cups05.jpg" alt="Cups05.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups06.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Cups06.jpg" alt="Cups06.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups07.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Cups07.jpg" alt="Cups07.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups08.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Cups08.jpg" alt="Cups08.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups09.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Cups09.jpg" alt="Cups09.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups10.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Cups10.jpg" alt="Cups10.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups11.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Cups11.jpg" alt="Cups11.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups12.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Cups12.jpg" alt="Cups12.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups13.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Cups13.jpg" alt="Cups13.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Cups14.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Cups14.jpg" alt="Cups14.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords01.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Swords01.jpg" alt="Swords01.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords02.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Swords02.jpg" alt="Swords02.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords03.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Swords03.jpg" alt="Swords03.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords04.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Swords04.jpg" alt="Swords04.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords05.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Swords05.jpg" alt="Swords05.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords06.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Swords06.jpg" alt="Swords06.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords07.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Swords07.jpg" alt="Swords07.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords08.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Swords08.jpg" alt="Swords08.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords09.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Swords09.jpg" alt="Swords09.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords10.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords10.jpg" alt="Swords10.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords11.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Swords11.jpg" alt="Swords11.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords12.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Swords12.jpg" alt="Swords12.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords13.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords13.jpg" alt="Swords13.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Swords14.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Swords14.jpg" alt="Swords14.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents01.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Pents01.jpg" alt="Pents01.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents02.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Pents02.jpg" alt="Pents02.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents03.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Pents03.jpg" alt="Pents03.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents04.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Pents04.jpg" alt="Pents04.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents05.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Pents05.jpg" alt="Pents05.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents06.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Pents06.jpg" alt="Pents06.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents07.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Pents07.jpg" alt="Pents07.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents08.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Pents08.jpg" alt="Pents08.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents09.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Pents09.jpg" alt="Pents09.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents10.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Pents10.jpg" alt="Pents10.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents11.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Pents11.jpg" alt="Pents11.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents12.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Pents12.jpg" alt="Pents12.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents13.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Pents13.jpg" alt="Pents13.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:Pents14.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Pents14.jpg" alt="Pents14.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_00_Fool.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg" alt="RWS_Tarot_00_Fool.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_01_Magician.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg" alt="RWS_Tarot_01_Magician.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_02_High_Priestess.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg" alt="RWS_Tarot_02_High_Priestess.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_03_Empress.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg" alt="RWS_Tarot_03_Empress.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_04_Emperor.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg" alt="RWS_Tarot_04_Emperor.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_05_Hierophant.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg" alt="RWS_Tarot_05_Hierophant.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_06_Lovers.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_06_Lovers.jpg" alt="RWS_Tarot_06_Lovers.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_07_Chariot.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg" alt="RWS_Tarot_07_Chariot.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_08_Strength.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg" alt="RWS_Tarot_08_Strength.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_09_Hermit.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg" alt="RWS_Tarot_09_Hermit.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_10_Wheel_of_Fortune.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg" alt="RWS_Tarot_10_Wheel_of_Fortune.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_11_Justice.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg" alt="RWS_Tarot_11_Justice.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_12_Hanged_Man.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg" alt="RWS_Tarot_12_Hanged_Man.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_13_Death.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg" alt="RWS_Tarot_13_Death.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_14_Temperance.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg" alt="RWS_Tarot_14_Temperance.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_15_Devil.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg" alt="RWS_Tarot_15_Devil.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_16_Tower.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg" alt="RWS_Tarot_16_Tower.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_17_Star.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg" alt="RWS_Tarot_17_Star.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_18_Moon.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg" alt="RWS_Tarot_18_Moon.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_19_Sun.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg" alt="RWS_Tarot_19_Sun.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_20_Judgement.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/RWS_Tarot_20_Judgement.jpg" alt="RWS_Tarot_20_Judgement.jpg"/>
+            </a>
+        
+            <a href="https://en.wikipedia.org/wiki/Rider%E2%80%93Waite_Tarot#/media/File:RWS_Tarot_21_World.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg" alt="RWS_Tarot_21_World.jpg"/>
+            </a>
+        
+    </div>
+
+
+</body>
+</html>
