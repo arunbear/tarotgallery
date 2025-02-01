@@ -121,10 +121,14 @@
             }
         }
 
+        function disableBackButton() {
+            $('#btn-back').prop('disabled', true);
+        }
+
         function back() {
             dealIndex -= 2;
             if (dealIndex < 1) {
-                $('#btn-back').prop('disabled', true);
+                disableBackButton();
             }
         }
 
@@ -140,6 +144,7 @@
             $('#btn-shuffle').on('click', function () {
                 shuffleCards(images);
                 dealIndex = 0;
+                disableBackButton();
                 refreshCards();
             });
         });
