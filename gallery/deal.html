@@ -123,24 +123,32 @@
         const pipImages = allImages.slice(0, 56);
         let images = pipImages;
         shuffleCards(images);
-        let dealIndex = -2;
+
+        let numOfCards = 2;
+        let dealIndex = 0;
 
         function refreshCards() {
             $('#image-1').prop('src', images[dealIndex]);
             $('#caption-1').text(dealIndex + 1);
             $('#image-2').prop('src', images[dealIndex + 1]);
             $('#caption-2').text(dealIndex + 2);
+
+            if (numOfCards === 3) {
+                $('#image-3').prop('src', images[dealIndex + 2]);
+                $('#caption-3').text(dealIndex + 3);
+            }
         }
 
         function deal() {
-            dealIndex = (dealIndex + 2) % images.length;
-            if (dealIndex > 1) {
+            dealIndex = (dealIndex + numOfCards) % images.length;
+            if (dealIndex >= numOfCards) {
                 $('#btn-back').prop('disabled', false);
                 $('#btn-shuffle').prop('disabled', false);
             }
             else {
                 disableBackButton();
             }
+            console.log('next deal from:' + dealIndex);
         }
 
         function disableBackButton() {
@@ -148,10 +156,12 @@
         }
 
         function back() {
-            dealIndex -= 2;
-            if (dealIndex < 1) {
+            dealIndex = (dealIndex - numOfCards) % images.length;
+            //dealIndex -= numOfCards;
+            if (dealIndex < numOfCards) {
                 disableBackButton();
             }
+            console.log('next deal from:' + dealIndex);
         }
 
         function resetDeck() {
@@ -171,6 +181,7 @@
                 refreshCards();
             });
             $('#btn-shuffle').on('click', function () {
+                resetDeck();
             });
             $('#chk-include-trumps').change(function () {
                 if (this.checked) {
@@ -182,6 +193,23 @@
                     resetDeck();
                 }
             });
+
+            $("input:radio").click(function () {
+                let value = $(this).val();
+                if (value === '2') {
+                    numOfCards = 2;
+                    $('#figure-3').css('display', 'none');
+                    $('#card-holder').css('grid-template-columns', '1fr 1fr');
+                    refreshCards();
+                }
+                else if (value === '3') {
+                    numOfCards = 3;
+                    $('#card-holder').css('grid-template-columns', '1fr 1fr 1fr');
+                    $('#figure-3').css('display', 'block');
+                    refreshCards();
+                }
+            });
+            refreshCards();
         });
     </script>
 
@@ -220,7 +248,7 @@
 </div>
 
 
-    <div class="card-holder">
+    <div class="card-holder" id="card-holder">
         <figure>
             <img id="image-1" class="card" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg" alt="tarot-card">
             <figcaption id="caption-1" style="text-align: center"></figcaption>
@@ -229,12 +257,23 @@
             <img id="image-2" class="card" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg" alt="tarot-card">
             <figcaption id="caption-2" style="text-align: center"></figcaption>
         </figure>
+        <figure id="figure-3" style="display: none">
+            <img id="image-3" class="card" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg" alt="tarot-card">
+            <figcaption id="caption-3" style="text-align: center"></figcaption>
+        </figure>
     </div>
     <div class="button-holder">
         <label>
             Include trumps
             <input type="checkbox" id="chk-include-trumps"/>
         </label>
+
+        | Number of cards:
+        <input type="radio" id="num_cards_2" name="num_cards" value="2" checked="checked">
+        <label for="num_cards_2">2</label>
+        <input type="radio" id="num_cards_3" name="num_cards" value="3">
+        <label for="num_cards_3">3</label>
+
         <br/>
         <button id="btn-shuffle" class="button" title="Reshuffle the whole deck" disabled="disabled">Shuffle</button>
         <button id="btn-deal" class="button" title="Deal cards from the deck">Deal</button>
