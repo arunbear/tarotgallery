@@ -22,6 +22,7 @@
     .card-holder figure img {
         max-width: 100%;
         object-fit: contain;
+        transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), border 0.2s ease, box-shadow 0.2s ease;
     }
 
     @media only screen and (min-width: 920px) {
@@ -37,6 +38,38 @@
     }
     .button {
         margin: 1%;
+    }
+    .rotate-btn {
+        background: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px 8px;
+        margin-top: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: transform 0.3s ease;
+    }
+    .rotate-btn:hover {
+        background-color: #f0f0f0;
+        border-color: #999;
+    }
+    .rotate-link {
+        display: block;
+    }
+    .card.rotated {
+        transform: rotate(180deg);
+    }
+    .card.selected {
+        transform: scale(1.15);
+        transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+    .card.selected.rotated {
+        transform: rotate(180deg) scale(1.15);
+        transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+    .card.selected:not(.rotated) {
+        transform: scale(1.15);
+        transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
     }
 
 
@@ -114,146 +147,153 @@
     </style>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/static/js/tarot-deck.js"></script>
 
     <script>
-        /* Randomize array in-place using Durstenfeld shuffle algorithm */
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i >= 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                const temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-            }
+        let deck;
+
+        function updateButtonStates(states) {
+            $('#btn-deal').prop('disabled', !states.dealEnabled);
+            $('#btn-back').prop('disabled', !states.backEnabled);
+            $('#btn-shuffle').prop('disabled', !states.shuffleEnabled);
         }
-
-        function shuffleCards(images) {
-            shuffleArray(images)
-        }
-
-        const backOfCardImgSrc = 'https://upload.wikimedia.org/wikipedia/commons/f/fc/Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg';
-
-        const allImages = ["https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg", "https://upload.wikimedia.org/wikipedia/commons/0/0f/Wands02.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/ff/Wands03.jpg", "https://upload.wikimedia.org/wikipedia/commons/a/a4/Wands04.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/9d/Wands05.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/3b/Wands06.jpg", "https://upload.wikimedia.org/wikipedia/commons/e/e4/Wands07.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/6b/Wands08.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tarot_Nine_of_Wands.jpg", "https://upload.wikimedia.org/wikipedia/commons/0/0b/Wands10.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/6a/Wands11.jpg", "https://upload.wikimedia.org/wikipedia/commons/1/16/Wands12.jpg", "https://upload.wikimedia.org/wikipedia/commons/0/0d/Wands13.jpg", "https://upload.wikimedia.org/wikipedia/commons/c/ce/Wands14.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/f8/Cups02.jpg", "https://upload.wikimedia.org/wikipedia/commons/7/7a/Cups03.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/35/Cups04.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d7/Cups05.jpg", "https://upload.wikimedia.org/wikipedia/commons/1/17/Cups06.jpg", "https://upload.wikimedia.org/wikipedia/commons/a/ae/Cups07.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/60/Cups08.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/24/Cups09.jpg", "https://upload.wikimedia.org/wikipedia/commons/8/84/Cups10.jpg", "https://upload.wikimedia.org/wikipedia/commons/a/ad/Cups11.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/fa/Cups12.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/62/Cups13.jpg", "https://upload.wikimedia.org/wikipedia/commons/0/04/Cups14.jpg", "https://upload.wikimedia.org/wikipedia/commons/1/1a/Swords01.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/9e/Swords02.jpg", "https://upload.wikimedia.org/wikipedia/commons/0/02/Swords03.jpg", "https://upload.wikimedia.org/wikipedia/commons/b/bf/Swords04.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/23/Swords05.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/29/Swords06.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/34/Swords07.jpg", "https://upload.wikimedia.org/wikipedia/commons/a/a7/Swords08.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/2f/Swords09.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords10.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/4c/Swords11.jpg", "https://upload.wikimedia.org/wikipedia/commons/b/b0/Swords12.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords13.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/33/Swords14.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/fd/Pents01.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/9f/Pents02.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/42/Pents03.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/35/Pents04.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/96/Pents05.jpg", "https://upload.wikimedia.org/wikipedia/commons/a/a6/Pents06.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/6a/Pents07.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/49/Pents08.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/f0/Pents09.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/42/Pents10.jpg", "https://upload.wikimedia.org/wikipedia/commons/e/ec/Pents11.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d5/Pents12.jpg", "https://upload.wikimedia.org/wikipedia/commons/8/88/Pents13.jpg", "https://upload.wikimedia.org/wikipedia/commons/1/1c/Pents14.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg", "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg", "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg", "https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_06_Lovers.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg", "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg", "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg", "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg", "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg", "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/dd/RWS_Tarot_20_Judgement.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg"];
-        const pipImages = allImages.slice(0, 56);
-        let images = pipImages;
-        shuffleCards(images);
-
-        let numOfCards = 2;
-        let cardsFromIndex = 0;
 
         function refreshCards() {
-            $('#image-1').prop('src', images[cardsFromIndex]);
-            $('#caption-1').text(cardsFromIndex + 1);
-            $('#image-2').prop('src', images[cardsFromIndex + 1]);
-            $('#caption-2').text(cardsFromIndex + 2);
-
-            if (numOfCards === 3) {
-                console.log('moreCardsToDeal: %s', moreCardsToDeal());
-                if (moreCardsToDeal()) {
-                    $('#image-3').prop('src', images[cardsFromIndex + 2]);
-                    $('#caption-3').text(cardsFromIndex + 3);
+            const cards = deck.getCurrentCards();
+            
+            $('#image-1').prop('src', deck.getCardDisplaySrc(cards[0]));
+            $('#caption-1 .card-number').text(deck.getCardDisplayCaption(cards[0]));
+            
+            $('#image-2').prop('src', deck.getCardDisplaySrc(cards[1]));
+            $('#caption-2 .card-number').text(deck.getCardDisplayCaption(cards[1]));
+            
+            if (deck.numOfCardsToDeal === 3) {
+                $('#figure-3').css('display', 'block');
+                $('#image-3').prop('src', deck.getCardDisplaySrc(cards[2]));
+                $('#caption-3 .card-number').text(deck.getCardDisplayCaption(cards[2]));
+            } else {
+                $('#figure-3').css('display', 'none');
+            }
+            
+            // Apply reversal states based on actual card numbers (caption)
+            cards.forEach((card, index) => {
+                if (card && card.caption) {
+                    const imageId = `#image-${index + 1}`;
+                    const shouldReverse = deck.cardIsReversedAtPos[card.caption];
+                    console.log(`Card ${card.caption} should reverse: ${shouldReverse}`); // Debug log
+                    if (shouldReverse) {
+                        $(imageId).addClass('rotated');
+                    } else {
+                        $(imageId).removeClass('rotated');
+                    }
                 }
-                else {
-                    $('#image-3').prop('src', backOfCardImgSrc);
-                    $('#caption-3').text('');
-                }
-            }
-        }
-
-        function deal() {
-            if (moreCardsToDeal()) {
-                cardsFromIndex += numOfCards;
-            }
-
-            if (cardsFromIndex >= numOfCards) {
-                enableBackButton();
-                $('#btn-shuffle').prop('disabled', false);
-            }
-            else {
-                disableBackButton();
-            }
-
-            if (!moreCardsToDeal()) {
-                disableDealButton();
-            }
-            console.log('cardsFromIndex: ' + cardsFromIndex);
-        }
-
-        function moreCardsToDeal() {
-            return cardsFromIndex + numOfCards < images.length;
-        }
-
-        function disableDealButton() {
-            $('#btn-deal').prop('disabled', true);
-        }
-
-        function enableBackButton() {
-            $('#btn-back').prop('disabled', false);
-        }
-
-        function disableBackButton() {
-            $('#btn-back').prop('disabled', true);
-        }
-
-        function enableDealButton() {
-            $('#btn-deal').prop('disabled', false);
-        }
-
-        function back() {
-            cardsFromIndex = (cardsFromIndex - numOfCards) % images.length;
-            if (cardsFromIndex < numOfCards) {
-                disableBackButton();
-            }
-            if (moreCardsToDeal()) {
-                enableDealButton();
-            }
-            console.log('cardsFromIndex: ' + cardsFromIndex);
-        }
-
-        function resetDeck() {
-            shuffleCards(images);
-            cardsFromIndex = 0;
-            disableBackButton();
-            refreshCards();
+            });
         }
 
         $(document).ready(function() {
+            // Initialize deck with data from Django template
+            deck = new TarotDeck(["https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg", "https://upload.wikimedia.org/wikipedia/commons/0/0f/Wands02.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/ff/Wands03.jpg", "https://upload.wikimedia.org/wikipedia/commons/a/a4/Wands04.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/9d/Wands05.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/3b/Wands06.jpg", "https://upload.wikimedia.org/wikipedia/commons/e/e4/Wands07.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/6b/Wands08.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tarot_Nine_of_Wands.jpg", "https://upload.wikimedia.org/wikipedia/commons/0/0b/Wands10.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/6a/Wands11.jpg", "https://upload.wikimedia.org/wikipedia/commons/1/16/Wands12.jpg", "https://upload.wikimedia.org/wikipedia/commons/0/0d/Wands13.jpg", "https://upload.wikimedia.org/wikipedia/commons/c/ce/Wands14.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/f8/Cups02.jpg", "https://upload.wikimedia.org/wikipedia/commons/7/7a/Cups03.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/35/Cups04.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d7/Cups05.jpg", "https://upload.wikimedia.org/wikipedia/commons/1/17/Cups06.jpg", "https://upload.wikimedia.org/wikipedia/commons/a/ae/Cups07.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/60/Cups08.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/24/Cups09.jpg", "https://upload.wikimedia.org/wikipedia/commons/8/84/Cups10.jpg", "https://upload.wikimedia.org/wikipedia/commons/a/ad/Cups11.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/fa/Cups12.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/62/Cups13.jpg", "https://upload.wikimedia.org/wikipedia/commons/0/04/Cups14.jpg", "https://upload.wikimedia.org/wikipedia/commons/1/1a/Swords01.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/9e/Swords02.jpg", "https://upload.wikimedia.org/wikipedia/commons/0/02/Swords03.jpg", "https://upload.wikimedia.org/wikipedia/commons/b/bf/Swords04.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/23/Swords05.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/29/Swords06.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/34/Swords07.jpg", "https://upload.wikimedia.org/wikipedia/commons/a/a7/Swords08.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/2f/Swords09.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords10.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/4c/Swords11.jpg", "https://upload.wikimedia.org/wikipedia/commons/b/b0/Swords12.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords13.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/33/Swords14.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/fd/Pents01.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/9f/Pents02.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/42/Pents03.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/35/Pents04.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/96/Pents05.jpg", "https://upload.wikimedia.org/wikipedia/commons/a/a6/Pents06.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/6a/Pents07.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/49/Pents08.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/f0/Pents09.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/42/Pents10.jpg", "https://upload.wikimedia.org/wikipedia/commons/e/ec/Pents11.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d5/Pents12.jpg", "https://upload.wikimedia.org/wikipedia/commons/8/88/Pents13.jpg", "https://upload.wikimedia.org/wikipedia/commons/1/1c/Pents14.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg", "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg", "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg", "https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_06_Lovers.jpg", "https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg", "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg", "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg", "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg", "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg", "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg", "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg", "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg", "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg", "https://upload.wikimedia.org/wikipedia/commons/d/dd/RWS_Tarot_20_Judgement.jpg", "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg"], 'https://upload.wikimedia.org/wikipedia/commons/f/fc/Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg');
+
             $('#btn-deal').on('click', function () {
-                deal();
+                const states = deck.deal();
+                updateButtonStates(states);
                 refreshCards();
             });
+            
             $('#btn-back').on('click', function () {
-                back();
+                const states = deck.back();
+                updateButtonStates(states);
                 refreshCards();
             });
+            
             $('#btn-shuffle').on('click', function () {
-                resetDeck();
+                const states = deck.reset();
+                updateButtonStates(states);
+                refreshCards();
             });
+            
             $('#chk-include-trumps').change(function () {
-                if (this.checked) {
-                    images = allImages;
-                    resetDeck();
-                }
-                else {
-                    images = pipImages;
-                    resetDeck();
-                }
+                deck.setIncludeTrumps(this.checked);
+                const states = deck.getButtonStates();
+                updateButtonStates(states);
+                refreshCards();
             });
 
             $("input:radio").click(function () {
-                let value = $(this).val();
+                const value = $(this).val();
                 if (value === '2') {
-                    numOfCards = 2;
-                    $('#figure-3').css('display', 'none');
+                    deck.setNumOfCards(2);
                     $('#card-holder').css('grid-template-columns', '1fr 1fr');
-                    refreshCards();
-                }
-                else if (value === '3') {
-                    numOfCards = 3;
+                } else if (value === '3') {
+                    deck.setNumOfCards(3);
                     $('#card-holder').css('grid-template-columns', '1fr 1fr 1fr');
-                    $('#figure-3').css('display', 'block');
-                    refreshCards();
+                }
+                const states = deck.getButtonStates();
+                updateButtonStates(states);
+                refreshCards();
+            });
+            
+            // Card click handlers
+            $('.card').on('click', function(e) {
+                e.stopPropagation();
+                
+                const cardId = $(this).attr('id');
+                const position = parseInt(cardId.split('-')[1]) - 1;
+                const cards = deck.getCurrentCards();
+                const card = cards[position];
+                
+                // If face-down is enabled and card exists, reveal it
+                if (deck.faceDownEnabled && card && card.caption) {
+                    if (!deck.cardIsFaceDownAtPos[card.caption]) {
+                        deck.revealCard(card.caption);
+                        refreshCards();
+                        return; // Don't process selection when revealing
+                    }
+                }
+                
+                // If clicking the already selected card, deselect it
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else {
+                    // Remove selection from all cards, then select this one
+                    $('.card').removeClass('selected');
+                    $(this).addClass('selected');
                 }
             });
+            
+            // Rotation link handlers - use event delegation and prevent bubbling
+            $(document).on('click', '.rotate-link', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Rotation link clicked'); // Debug log
+                const cardNumber = $(this).data('card');
+                const imageId = `#image-${cardNumber}`;
+                console.log('Toggling rotation on', imageId); // Debug log
+                $(imageId).toggleClass('rotated');
+            });
+            
+            // Reversed cards checkbox handler
+            $('#chk-reversed-cards').change(function() {
+                const isReversed = $(this).is(':checked');
+                deck.setReversedCardsEnabled(isReversed);
+                
+                if (!isReversed) {
+                    $('.card').removeClass('rotated');
+                }
+                
+                refreshCards(); // Apply the new reversal states
+            });
+            
+            // Face down cards checkbox handler
+            $('#chk-face-down').change(function() {
+                const isFaceDown = $(this).is(':checked');
+                deck.setFaceDownEnabled(isFaceDown);
+                refreshCards(); // Apply the new face-down states
+            });
+            
+            // Initial render
+            const states = deck.getButtonStates();
+            updateButtonStates(states);
             refreshCards();
         });
     </script>
@@ -305,15 +345,27 @@
     <div class="card-holder" id="card-holder">
         <figure>
             <img id="image-1" class="card" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg">
-            <figcaption id="caption-1" style="text-align: center"></figcaption>
+            <figcaption id="caption-1" style="text-align: center">
+                <a href="#" class="rotate-link" data-card="1" title="Reverse">
+                    <span class="card-number"></span>
+                </a>
+            </figcaption>
         </figure>
         <figure>
             <img id="image-2" class="card" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg" alt="tarot-card">
-            <figcaption id="caption-2" style="text-align: center"></figcaption>
+            <figcaption id="caption-2" style="text-align: center">
+                <a href="#" class="rotate-link" data-card="2" title="Reverse">
+                    <span class="card-number"></span>
+                </a>
+            </figcaption>
         </figure>
         <figure id="figure-3" style="display: none">
             <img id="image-3" class="card" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg" alt="tarot-card">
-            <figcaption id="caption-3" style="text-align: center"></figcaption>
+            <figcaption id="caption-3" style="text-align: center">
+                <a href="#" class="rotate-link" data-card="3" title="Reverse">
+                    <span class="card-number"></span>
+                </a>
+            </figcaption>
         </figure>
     </div>
     <div class="button-holder">
@@ -325,6 +377,16 @@
         <label>
             Include trumps
             <input type="checkbox" id="chk-include-trumps"/>
+        </label>
+
+        <label>
+            &nbsp; Reversed cards
+            <input type="checkbox" id="chk-reversed-cards"/>
+        </label>
+
+        <label>
+            &nbsp; Face down
+            <input type="checkbox" id="chk-face-down"/>
         </label>
 
         &nbsp; Number of cards:
