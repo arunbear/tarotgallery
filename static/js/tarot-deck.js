@@ -6,6 +6,7 @@ class TarotDeck {
         this.backOfCardImgSrc = backOfCardImgSrc;
         this.displayPosition = 0; // 0 .. images.length - 1, tracks the position of the first card to be displayed
         this.numOfCardsToDeal = 2;
+        this.positionHistory = [0]; // Track all positions for proper back navigation
         this.cardIsReversedAtPos = {}; // Store persistent reversal states
         this.cardIsFaceDownAtPos = {}; // Store persistent face-down states
         this.faceDownEnabled = false;
@@ -33,14 +34,25 @@ class TarotDeck {
     deal() {
         if (this.hasMoreCardsToDeal()) {
             this.displayPosition += this.numOfCardsToDeal;
+            this.positionHistory.push(this.displayPosition);
+        }
+        return this.getButtonStates();
+    }
+
+    dealOne() {
+        if (this.displayPosition < this.images.length - 1) {
+            this.displayPosition += 1;
+            this.positionHistory.push(this.displayPosition);
         }
         return this.getButtonStates();
     }
 
     back() {
-        this.displayPosition = (this.displayPosition - this.numOfCardsToDeal) % this.images.length;
-        if (this.displayPosition < 0) {
-            this.displayPosition = 0;
+        console.log('Back called. Current position:', this.displayPosition, 'History:', this.positionHistory);
+        if (this.positionHistory.length > 1) {
+            this.positionHistory.pop(); // Remove current position
+            this.displayPosition = this.positionHistory[this.positionHistory.length - 1]; // Go to previous position
+            console.log('After back. New position:', this.displayPosition, 'New history:', this.positionHistory);
         }
         return this.getButtonStates();
     }
@@ -48,6 +60,7 @@ class TarotDeck {
     reset() {
         this.shuffleCards(this.images);
         this.displayPosition = 0;
+        this.positionHistory = [0];
         return this.getButtonStates();
     }
 
@@ -63,12 +76,13 @@ class TarotDeck {
     setNumOfCards(num) {
         this.numOfCardsToDeal = num;
         this.displayPosition = 0;
+        this.positionHistory = [0];
     }
 
     getButtonStates() {
         return {
             dealEnabled: this.hasMoreCardsToDeal(),
-            backEnabled: this.displayPosition >= this.numOfCardsToDeal,
+            backEnabled: this.positionHistory.length > 1,
             shuffleEnabled: this.displayPosition >= this.numOfCardsToDeal
         };
     }
@@ -132,7 +146,7 @@ class TarotDeck {
     setReversedCardsEnabled(enabled) {
         if (enabled) {
             // Generate and store coin toss results for entire deck (78 cards)
-            for (let i = 1; i <= 78; i++) {
+            for (let i = 0; i < 78; i++) {
                 this.cardIsReversedAtPos[i] = Math.random() < 0.5; // Store 50% chance result
             }
         } else {

@@ -175,12 +175,13 @@
                 $('#figure-3').css('display', 'none');
             }
             
-            // Apply reversal states based on actual card numbers (caption)
+            // Apply reversal states based on actual card positions
             cards.forEach((card, index) => {
                 if (card && card.caption) {
                     const imageId = `#image-${index + 1}`;
-                    const shouldReverse = deck.cardIsReversedAtPos[card.caption];
-                    console.log(`Card ${card.caption} should reverse: ${shouldReverse}`); // Debug log
+                    const cardPosition = deck.displayPosition + index;
+                    const shouldReverse = deck.cardIsReversedAtPos[cardPosition];
+                    console.log(`Card at position ${cardPosition} should reverse: ${shouldReverse}`); // Debug log
                     if (shouldReverse) {
                         $(imageId).addClass('rotated');
                     } else {
@@ -196,6 +197,12 @@
 
             $('#btn-deal').on('click', function () {
                 const states = deck.deal();
+                updateButtonStates(states);
+                refreshCards();
+            });
+            
+            $('#btn-deal-1').on('click', function () {
+                const states = deck.dealOne();
                 updateButtonStates(states);
                 refreshCards();
             });
@@ -370,7 +377,10 @@
     </div>
     <div class="button-holder">
         <button id="btn-shuffle" class="button" title="Reshuffle the whole deck" disabled="disabled">Shuffle</button>
+        &nbsp; &nbsp;
         <button id="btn-deal" class="button" title="Deal cards from the deck">Deal</button>
+        <button id="btn-deal-1" class="button" title="Deal only one card">Deal 1</button>
+        &nbsp;
         <button id="btn-back" class="button" title="View previous cards" disabled="disabled">Back</button>
         <hr/>
 
