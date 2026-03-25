@@ -171,8 +171,17 @@
                 $('#figure-3').css('display', 'block');
                 $('#image-3').prop('src', deck.getCardDisplaySrc(cards[2]));
                 $('#caption-3 .card-number').text(deck.getCardDisplayCaption(cards[2]));
+                $('#figure-4').css('display', 'none');
+            } else if (deck.numOfCardsToDeal === 4) {
+                $('#figure-3').css('display', 'block');
+                $('#image-3').prop('src', deck.getCardDisplaySrc(cards[2]));
+                $('#caption-3 .card-number').text(deck.getCardDisplayCaption(cards[2]));
+                $('#figure-4').css('display', 'block');
+                $('#image-4').prop('src', deck.getCardDisplaySrc(cards[3]));
+                $('#caption-4 .card-number').text(deck.getCardDisplayCaption(cards[3]));
             } else {
                 $('#figure-3').css('display', 'none');
+                $('#figure-4').css('display', 'none');
             }
             
             // Apply reversal states based on actual card positions
@@ -234,6 +243,9 @@
                 } else if (value === '3') {
                     deck.setNumOfCards(3);
                     $('#card-holder').css('grid-template-columns', '1fr 1fr 1fr');
+                } else if (value === '4') {
+                    deck.setNumOfCards(4);
+                    $('#card-holder').css('grid-template-columns', '1fr 1fr 1fr 1fr');
                 }
                 const states = deck.getButtonStates();
                 updateButtonStates(states);
@@ -374,6 +386,14 @@
                 </a>
             </figcaption>
         </figure>
+        <figure id="figure-4" style="display: none">
+            <img id="image-4" class="card" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg" alt="tarot-card">
+            <figcaption id="caption-4" style="text-align: center">
+                <a href="#" class="rotate-link" data-card="4" title="Reverse">
+                    <span class="card-number"></span>
+                </a>
+            </figcaption>
+        </figure>
     </div>
     <div class="button-holder">
         <button id="btn-shuffle" class="button" title="Reshuffle the whole deck" disabled="disabled">Shuffle</button>
@@ -404,6 +424,8 @@
         <label for="num_cards_2">2</label>
         <input type="radio" id="num_cards_3" name="num_cards" value="3">
         <label for="num_cards_3">3</label>
+        <input type="radio" id="num_cards_4" name="num_cards" value="4">
+        <label for="num_cards_4">4</label>
     </div>
 
 </body>
